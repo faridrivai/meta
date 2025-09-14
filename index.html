@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Sebuah Pesan Untukmu...</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* === BASIC RESET & STYLING === */
+        :root {
+            --primary-color: #00ffff; /* Cyan Neon */
+            --dark-bg: #0a0a1a;
+            --light-text: #e0e0e0;
+            --dark-text: #1a1a2e;
+            --card-bg: rgba(26, 26, 46, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* === PARTICLES.JS BACKGROUND === */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        /* === MAIN CONTAINER === */
+        .container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 800px;
+            width: 90%;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* === HEADER/HERO SECTION === */
+        .header {
+            margin-bottom: 3rem;
+            animation: fadeInDown 1s ease-out;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: var(--light-text);
+        }
+
+        /* === MESSAGE CARD === */
+        .message-card {
+            background: var(--card-bg);
+            border: 1px solid var(--primary-color);
+            border-radius: 15px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
+            animation: fadeInUp 1.5s ease-out;
+            margin-bottom: 3rem;
+        }
+
+        #typed-message {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            min-height: 100px; /* To prevent layout shift */
+            text-align: left;
+        }
+        
+        /* Blinking cursor for typewriter effect */
+        .typed-cursor {
+            color: var(--primary-color);
+            font-weight: bold;
+            animation: blink 0.7s infinite;
+        }
+
+        /* === CALL TO ACTION BUTTON === */
+        .cta-button {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+            animation: fadeIn 2s ease-out;
+        }
+        
+        .cta-button:hover {
+            background-color: var(--primary-color);
+            color: var(--dark-bg);
+            box-shadow: 0 0 25px var(--primary-color), 0 0 40px var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        /* === ANIMATIONS === */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* === RESPONSIVE DESIGN === */
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            .header .subtitle {
+                font-size: 1rem;
+            }
+            #typed-message {
+                font-size: 1rem;
+            }
+            .cta-button {
+                font-size: 1rem;
+                padding: 10px 25px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="particles-js"></div>
+
+    <div class="container">
+        
+        <header class="header">
+            <h1>Untuk META</h1>
+            <p class="subtitle">Sebuah Sinyal dari Alam Semesta Digital</p>
+        </header>
+
+        <main>
+            <section class="message-card">
+                <p id="typed-message"></p>
+            </section>
+
+            <section class="action-section">
+                <a href="https://wa.me/+6285898865352?text=HEII,AKU MAU JADI PACAR KAMU" target="_blank" class="cta-button">[Balas Pesan Ini]</a>
+            </section>
+        </main>
+        
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+    <script>
+        // === KONFIGURASI PARTIKEL ===
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 100,
+                    "density": { "enable": true, "value_area": 800 }
+                },
+                "color": { "value": "#00ffff" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5, "random": true },
+                "size": { "value": 3, "random": true },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#00ffff",
+                    "opacity": 0.3,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 2,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": { "enable": true, "mode": "grab" },
+                    "onclick": { "enable": true, "mode": "push" },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": { "distance": 140, "line_linked": { "opacity": 1 } },
+                    "push": { "particles_nb": 4 }
+                }
+            },
+            "retina_detect": true
+        });
+
+        // === KONFIGURASI EFEK KETIKAN ===
+        // GANTI PESAN-PESAN DI BAWAH INI
+        // Gunakan `^1000` untuk jeda 1 detik
+        const messages = [
+            "Hai, META.^1000",
+            "Kamu jangan sedih lagiii yaaaaa^1000",
+            "Jangan mikirin masa lalu kamu.^1000",
+            "Semoga ini bisa jadi awal dari sesuatu yang menarik. ✨"
+        ];
+
+        var options = {
+            strings: messages,
+            typeSpeed: 50,  // Kecepatan mengetik
+            backSpeed: 25,  // Kecepatan menghapus
+            backDelay: 1500, // Jeda sebelum mulai menghapus
+            startDelay: 500, // Jeda sebelum mulai mengetik
+            loop: false, // Tidak mengulang dari awal
+            showCursor: true,
+            cursorChar: '█',
+            contentType: 'html', // Bisa menggunakan tag html jika perlu
+        };
+
+        var typed = new Typed('#typed-message', options);
+    </script>
+
+</body>
+</html>
