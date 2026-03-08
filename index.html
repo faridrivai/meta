@@ -20,9 +20,26 @@
             overflow-x: hidden; scroll-behavior: smooth;
         }
 
+        /* --- SECTION 0: LOGIN --- */
+        #login-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: #000; z-index: 9999;
+            display: flex; justify-content: center; align-items: center;
+        }
+
+        .login-input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--neon-blue);
+            padding: 15px; border-radius: 15px;
+            color: white; text-align: center; font-size: 1.2rem;
+            outline: none; width: 200px; margin-bottom: 20px;
+        }
+
+        .login-input::placeholder { color: rgba(255, 255, 255, 0.3); }
+
         /* --- SECTION 1: PERTANYAAN --- */
         .question-state {
-            height: 100vh; display: flex; justify-content: center; align-items: center;
+            height: 100vh; display: none; justify-content: center; align-items: center;
             position: fixed; width: 100%; z-index: 2000;
             background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
         }
@@ -120,6 +137,15 @@
 </head>
 <body>
 
+    <div id="login-overlay">
+        <div class="card">
+            <h2 style="color: var(--neon-blue); margin-bottom: 30px;">Kapan kita jadian? ❤️</h2>
+            <input type="text" id="pass-input" class="login-input" placeholder="ddmmyyyy" maxlength="8" autocomplete="off">
+            <br>
+            <button class="btn-yes" onclick="checkLogin()">MASUK</button>
+        </div>
+    </div>
+
     <div id="questions-wrapper" class="question-state">
         <div id="q1" class="card">
             <h2>Kamu maafin aku kan, Meta?</h2>
@@ -194,17 +220,29 @@
 
     <script>
         const audio = document.getElementById('bg-music');
-        const html = document.documentElement;
         const nomorWA = "6285798865352";
+
+        function checkLogin() {
+            const passInput = document.getElementById('pass-input').value;
+            if (passInput === "07092025") {
+                document.getElementById('login-overlay').style.display = 'none';
+                document.getElementById('questions-wrapper').style.display = 'flex';
+            } else {
+                alert("Tanggal salah, coba inget lagi sayang...");
+            }
+        }
 
         function nextStep(step) {
             const allNoButtons = document.querySelectorAll('.btn-no');
             allNoButtons.forEach(btn => {
                 btn.style.position = 'relative'; btn.style.left = '0'; btn.style.top = '0';
             });
-            document.querySelectorAll('.card').forEach(c => c.classList.add('hidden'));
+            document.querySelectorAll('.card').forEach(c => {
+                if(c.id !== 'login-overlay') c.classList.add('hidden');
+            });
             document.getElementById('q' + step).classList.remove('hidden');
-            audio.play().then(() => audio.pause()).catch(e => console.log(e));
+            // Menyiapkan audio agar tidak delay saat di-unlock
+            audio.play().then(() => audio.pause());
         }
 
         function moveButton(btn) {
@@ -238,6 +276,8 @@
             if (document.getElementById('main-sequence').style.display === 'block') {
                 const scrollPercent = window.scrollY / (document.getElementById('main-sequence').offsetHeight - window.innerHeight);
                 const frameIndex = Math.max(1, Math.min(240, Math.ceil(scrollPercent * 240)));
+                
+                // Pastikan path folder sequence benar
                 document.getElementById('sequence-img').src = `sequence/ezgif-frame-${frameIndex.toString().padStart(3, '0')}.jpg`;
 
                 document.getElementById('text-1').classList.toggle('visible', scrollPercent > 0.05 && scrollPercent < 0.2);
