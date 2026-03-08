@@ -171,7 +171,7 @@
     </div>
 
     <div id="main-sequence">
-        <div id="sequence-container"><img id="sequence-img" src="sequence/ezgif-frame-001.jpg"></div>
+        <div id="sequence-container"><img id="sequence-img" src="ezgif-frame-001.jpg"></div>
         <div class="story-text-overlay">
             <div id="text-1" class="story-text">Selamat datang, Metaa ✨</div>
             <div id="text-2" class="story-text">Aku buat ini biar kamu selalu inget sama aku... ❤️</div>
@@ -187,10 +187,10 @@
             <div class="dream-card">
                 <h3 style="text-align:center; color:var(--neon-pink);">Destinasi Impian Kita</h3>
                 <div class="destinasi-grid">
-                    <div class="destinasi-item"><img src="sequence/dieng.jpg"><span>DIENG</span></div>
-                    <div class="destinasi-item"><img src="sequence/swis.webp"><span>SWISS</span></div>
-                    <div class="destinasi-item"><img src="sequence/bali.webp"><span>BALI</span></div>
-                    <div class="destinasi-item"><img src="sequence/lombok.jpeg"><span>LOMBOK</span></div>
+                    <div class="destinasi-item"><img src="dieng.jpg"><span>DIENG</span></div>
+                    <div class="destinasi-item"><img src="swis.webp"><span>SWISS</span></div>
+                    <div class="destinasi-item"><img src="bali.webp"><span>BALI</span></div>
+                    <div class="destinasi-item"><img src="lombok.jpeg"><span>LOMBOK</span></div>
                 </div>
             </div>
             
@@ -215,7 +215,7 @@
     </section>
 
     <audio id="bg-music" loop preload="auto">
-        <source src="sequence/salpriadi.mp3" type="audio/mpeg">
+        <source src="salpriadi.mp3" type="audio/mpeg">
     </audio>
 
     <script>
@@ -241,7 +241,6 @@
                 if(c.id !== 'login-overlay') c.classList.add('hidden');
             });
             document.getElementById('q' + step).classList.remove('hidden');
-            // Menyiapkan audio agar tidak delay saat di-unlock
             audio.play().then(() => audio.pause());
         }
 
@@ -277,8 +276,8 @@
                 const scrollPercent = window.scrollY / (document.getElementById('main-sequence').offsetHeight - window.innerHeight);
                 const frameIndex = Math.max(1, Math.min(240, Math.ceil(scrollPercent * 240)));
                 
-                // Pastikan path folder sequence benar
-                document.getElementById('sequence-img').src = `sequence/ezgif-frame-${frameIndex.toString().padStart(3, '0')}.jpg`;
+                // PATH GAMBAR LANGSUNG DI FOLDER UTAMA
+                document.getElementById('sequence-img').src = `ezgif-frame-${frameIndex.toString().padStart(3, '0')}.jpg`;
 
                 document.getElementById('text-1').classList.toggle('visible', scrollPercent > 0.05 && scrollPercent < 0.2);
                 document.getElementById('text-2').classList.toggle('visible', scrollPercent > 0.3 && scrollPercent < 0.5);
